@@ -1,0 +1,6 @@
+{
+  "name": "Council of Diplomatic Affairs",
+  "description": "Model United Nations conference platform featuring interactive committees, session schedules, and team bios.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
