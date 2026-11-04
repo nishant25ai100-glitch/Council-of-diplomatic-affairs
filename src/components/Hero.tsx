@@ -95,7 +95,7 @@ export default function Hero({ onOpenRegister }: HeroProps) {
           variants={itemVariants}
           className="font-sans font-light text-brand-muted text-sm sm:text-base leading-relaxed max-w-lg mb-8"
         >
-          Diplomacy isn't old school — it's the new flex. Join the most ambitious young minds for interactive simulations and high-stakes global debates that actually matter.
+          Practical diplomacy, sharp procedure, and substantive debate. Join student delegates from across the country to tackle pressing international crises and policy disputes.
         </motion.p>
 
         {/* CTA Actions */}

@@ -10,23 +10,23 @@ export default function About({ onOpenRegister }: AboutProps) {
   const cardItems = [
     {
       icon: <BrainCircuit className="w-6 h-6 text-brand-gold" />,
-      title: "Top Exec Board",
-      desc: "Seasoned MUN professionals and active debate circuit veterans ensuring authentic, top-tier simulations."
+      title: "Circuit Veterans",
+      desc: "Chaired by experienced circuit head delegates focused on rigorous procedure and fair moderation."
     },
     {
       icon: <Globe className="w-6 h-6 text-brand-gold" />,
-      title: "Global Committees",
-      desc: "From local Lok Sabha reforms to the UNSC — curated agendas that are intensely relevant to today's news."
+      title: "Targeted Agendas",
+      desc: "Specialized tracks spanning Indian parliamentary policy to multilateral crisis diplomacy."
     },
     {
       icon: <Users className="w-6 h-6 text-brand-gold" />,
-      title: "Elite Network",
-      desc: "Connect with the most ambitious student leaders from institutions nationwide. Build real friendships."
+      title: "National Network",
+      desc: "Compete and collaborate with delegates from schools and universities nationwide."
     },
     {
       icon: <Trophy className="w-6 h-6 text-brand-gold" />,
-      title: "Skill Mastery",
-      desc: "Public speaking, strategic negotiation, crisis analysis, and consensus-building — completely levelled up."
+      title: "Practical Training",
+      desc: "Direct practice in resolution drafting, bloc negotiation, and rapid crisis response."
     }
   ];
 
@@ -63,20 +63,20 @@ export default function About({ onOpenRegister }: AboutProps) {
             Who We Are
           </span>
           <h2 className="font-syne font-extrabold text-3xl sm:text-5xl text-brand-text mb-6 leading-tight">
-            More Than A Conference.<br />
-            <span className="text-brand-gold bg-gradient-to-r from-brand-gold to-brand-gold2 bg-clip-text text-transparent">A Movement.</span>
+            Substance Over Scripted Debate.<br />
+            <span className="text-brand-gold bg-gradient-to-r from-brand-gold to-brand-gold2 bg-clip-text text-transparent">Realistic Diplomacy.</span>
           </h2>
           <div className="w-10 h-[3px] bg-brand-gold mb-8 rounded" />
           
           <div className="font-sans text-brand-muted text-[15px] leading-relaxed space-y-4 font-light">
             <p>
-              Council of Diplomatic Affairs is a Model United Nations conference built for a generation that doesn't just scroll past global challenges — <strong className="font-medium text-brand-text">we address them directly</strong>.
+              Council of Diplomatic Affairs is a Model United Nations conference focused on realistic committee dynamics and thorough research.
             </p>
             <p>
-              We blend the rigorous structure of traditional UN diplomacy with a Gen Z energy that keeps debate sharp, practical, and highly relevant. Whether you're a first-timer testing your voice or a veteran delegate with directories of binders — this chamber is yours.
+              We prioritize genuine parliamentary procedure, unscripted crisis management, and policy that holds up under scrutiny. Whether you are stepping into committee for the first time or returning with years of circuit experience, CDA is built to challenge your preparation and speaking.
             </p>
             <p>
-              Our committees are selected for maximum intellectual impact, our executive board brings deep experience, and our delegates are standard-setters who refuse to accept cookie-cutter answers to the world's most critical crisis nodes.
+              Every committee agenda reflects active diplomatic tensions, moderated by an Executive Board drawn directly from the national circuit.
             </p>
           </div>
 
