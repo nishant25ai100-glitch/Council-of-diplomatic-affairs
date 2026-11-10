@@ -1,7 +1,6 @@
 import { motion } from "motion/react";
 import { Award, ArrowRight } from "lucide-react";
 import { CONFIG } from "../data";
-import NewspaperCutout from "./NewspaperCutout";
 
 interface HeroProps {
   onOpenRegister: () => void;
@@ -38,24 +37,6 @@ export default function Hero({ onOpenRegister }: HeroProps) {
       
       {/* Golden Radial Glow */}
       <div className="absolute top-[35%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] sm:w-[600px] h-[150px] sm:h-[300px] rounded-full bg-radial from-brand-gold/15 to-transparent blur-3xl pointer-events-none z-0" />
-
-      {/* Editorial Newspaper Cutouts Flanking the Hero Section */}
-      <div className="block absolute top-28 sm:top-24 lg:top-[22%] left-1 sm:left-3 md:left-6 xl:left-8 2xl:left-14 z-0 lg:z-10 opacity-85 sm:opacity-90 lg:opacity-100">
-        <NewspaperCutout
-          variant="scales-of-justice"
-          rotation="-rotate-6 sm:-rotate-3"
-          tapePosition="top"
-          label="INT'L LAW // CDA"
-        />
-      </div>
-      <div className="block absolute top-32 sm:top-28 lg:top-[20%] right-1 sm:right-3 md:right-6 xl:right-8 2xl:right-14 z-0 lg:z-10 opacity-85 sm:opacity-90 lg:opacity-100">
-        <NewspaperCutout
-          variant="vintage-newsprint"
-          rotation="rotate-6 sm:rotate-3"
-          tapePosition="top-right"
-          label="PRESS ARCHIVE"
-        />
-      </div>
 
       {/* Hero Content */}
       <motion.div

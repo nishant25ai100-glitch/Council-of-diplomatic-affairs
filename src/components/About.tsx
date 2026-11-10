@@ -1,6 +1,5 @@
 import { motion } from "motion/react";
 import { BrainCircuit, Globe, Users, Trophy, ChevronRight } from "lucide-react";
-import NewspaperCutout from "./NewspaperCutout";
 
 interface AboutProps {
   onOpenRegister: () => void;
@@ -32,24 +31,6 @@ export default function About({ onOpenRegister }: AboutProps) {
 
   return (
     <section id="about" className="py-20 lg:py-28 bg-brand-bg/40 backdrop-blur-[1px] px-6 lg:px-12 relative overflow-hidden border-b border-brand-border/20">
-      {/* Editorial Newspaper Cutouts Flanking the About Section */}
-      <div className="block absolute left-1 sm:left-3 md:left-6 xl:left-8 2xl:left-12 bottom-6 sm:bottom-12 z-0 opacity-80 sm:opacity-85 lg:opacity-95">
-        <NewspaperCutout
-          variant="assembly-crowd"
-          rotation="rotate-3 sm:rotate-2"
-          tapePosition="top"
-          label="CIVIC MOVEMENT"
-        />
-      </div>
-      <div className="block absolute right-1 sm:right-3 md:right-6 xl:right-8 2xl:right-12 top-6 sm:top-14 z-0 opacity-80 sm:opacity-85 lg:opacity-95">
-        <NewspaperCutout
-          variant="editorial-brain"
-          rotation="-rotate-6 sm:-rotate-3"
-          tapePosition="pin"
-          label="CRISIS ANALYSIS"
-        />
-      </div>
-
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center relative z-10">
         {/* Left Side: Editorial Typography */}
         <motion.div

@@ -25,15 +25,7 @@ export default function RegistrationForm({ initialSelectedCommittee, isOpen, onC
   const [registeredData, setRegisteredData] = useState<RegistrationData | null>(null);
   const [showForm, setShowForm] = useState(true);
   const [errorMsg, setErrorMsg] = useState("");
-
-  // Load existing registration from LocalStorage
-  useEffect(() => {
-    const saved = localStorage.getItem("cda_mun_registration");
-    if (saved) {
-      setRegisteredData(JSON.parse(saved));
-      setShowForm(false);
-    }
-  }, []);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Update primary committee selection if passed as initial prop
   useEffect(() => {
@@ -54,42 +46,70 @@ export default function RegistrationForm({ initialSelectedCommittee, isOpen, onC
     }));
   };
 
-  const handleApply = (e: FormEvent) => {
-    e.preventDefault();
-    setErrorMsg("");
+  const handleApply = async (e: FormEvent) => {
+  e.preventDefault();
 
-    // Minimal validation
-    if (!formData.fullName.trim() || !formData.email.trim() || !formData.institution.trim()) {
-      setErrorMsg("Please fill out all required fields: Name, Email & Institution.");
-      return;
+  if (isSubmitting) return;
+
+  setErrorMsg("");
+
+  if (
+    !formData.fullName.trim() ||
+    !formData.email.trim() ||
+    !formData.institution.trim() ||
+    !formData.whatsapp.trim()
+  ) {
+    setErrorMsg("Please fill in all required fields.");
+    return;
+  }
+
+  setIsSubmitting(true);
+
+  try {
+    const response = await fetch("/api/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+
+    const result = await response.json();
+
+    if (!response.ok || !result.success) {
+      throw new Error(
+        result.message || "Registration failed. Please try again."
+      );
     }
 
-    const randomSuffix = Math.floor(1000 + Math.random() * 9000);
-    const primaryId = formData.primaryCommittee.substring(0, 3).toUpperCase();
-    const mockPass: RegistrationData = {
+    const registration = result.registration;
+
+    const newRegistration: RegistrationData = {
       ...formData,
-      registeredAt: new Date().toLocaleDateString("en-US", {
-        month: "short",
-        day: "numeric",
-        year: "numeric"
-      }),
-      passId: `CDA-26-${primaryId}-${randomSuffix}`
+      registeredAt: new Date(
+        registration.created_at
+      ).toLocaleDateString("en-IN"),
+      passId: registration.registration_id,
     };
 
-    localStorage.setItem("cda_mun_registration", JSON.stringify(mockPass));
-    setRegisteredData(mockPass);
+    setRegisteredData(newRegistration);
     setShowForm(false);
 
-    // Open the official Google Form in a separate tab to preserve the original registration requirements!
-    window.open(CONFIG.registrationUrl, "_blank");
-  };
-
-  const handleResetRegistration = () => {
-    if (confirm("Are you sure you want to cancel or reset your registration details?")) {
-      localStorage.removeItem("cda_mun_registration");
-      setRegisteredData(null);
-      setShowForm(true);
-    }
+  } catch (error) {
+    setErrorMsg(
+      error instanceof Error
+        ? error.message
+        : "Something went wrong. Please try again."
+    );
+  } finally {
+    setIsSubmitting(false);
+  }
+};
+    
+   const handleResetRegistration = () => {
+    setRegisteredData(null);
+    setShowForm(true);
+    setErrorMsg("");
   };
 
   return (
@@ -133,7 +153,7 @@ export default function RegistrationForm({ initialSelectedCommittee, isOpen, onC
                     Apply for Delegate Seat
                   </h3>
                   <p className="font-sans font-light text-xs text-brand-muted mt-1 leading-relaxed">
-                    Set up your portfolio badge right inside the portal first, then proceed to the official form. All fields matched securely in local cache.
+                    Complete your delegate registration below. Your registration will be saved securely, and payment confirmation will follow.
                   </p>
                 </div>
 
@@ -197,8 +217,9 @@ export default function RegistrationForm({ initialSelectedCommittee, isOpen, onC
                         WhatsApp Contact / Mobile No.
                       </label>
                       <input
-                        type="text"
-                        name="whatsapp"
+                      type="tel"
+                      name="whatsapp"
+                      required
                         value={formData.whatsapp}
                         onChange={handleInputChange}
                         placeholder="e.g. +91 98765 43210"
@@ -290,31 +311,41 @@ export default function RegistrationForm({ initialSelectedCommittee, isOpen, onC
                   </div>
 
                   <div className="pt-4 flex flex-col sm:flex-row gap-3 items-center justify-between border-t border-brand-border/40">
-                    <p className="text-[11px] font-sans font-light text-brand-muted text-center sm:text-left">
-                      <strong>Fee:</strong> <span className="text-brand-gold font-bold">{CONFIG.fee}</span>. Official payment processed post Google Forms submission.
-                    </p>
-                    <div className="flex gap-2 w-full sm:w-auto">
-                      <button
-                        type="button"
-                        onClick={onClose}
-                        className="flex-1 sm:flex-none px-5 py-3 border border-brand-border text-brand-muted hover:text-brand-text hover:border-brand-border2 font-syne font-bold text-xs uppercase tracking-widest rounded transition-all cursor-pointer"
-                      >
-                        Cancel
-                      </button>
-                      <button
-                        type="submit"
-                        className="flex-1 sm:flex-none flex items-center justify-center gap-1.5 bg-brand-gold hover:bg-brand-gold2 text-black font-syne font-bold text-xs uppercase tracking-widest px-6 py-3.5 rounded cursor-pointer transition-all shadow-lg"
-                      >
-                        Generate Pass &amp; Apply
-                        <ChevronRight className="w-3.5 h-3.5" />
-                      </button>
-                    </div>
-                  </div>
-                </form>
-              </div>
+
+  <p className="text-[11px] font-sans font-light text-brand-muted text-center sm:text-left">
+    <strong>Fee:</strong>{" "}
+    <span className="text-brand-gold font-bold">
+      {CONFIG.fee}
+    </span>
+    . Registration will remain pending until payment is completed.
+  </p>
+
+  <div className="flex gap-2 w-full sm:w-auto">
+
+    <button
+      type="button"
+      onClick={onClose}
+      className="flex-1 sm:flex-none px-5 py-3 border border-brand-border text-brand-muted hover:text-brand-text hover:border-brand-border2 font-syne font-bold text-xs uppercase tracking-widest rounded transition-all cursor-pointer"
+    >
+      Cancel
+    </button>
+
+    <button
+      type="submit"
+      disabled={isSubmitting}
+      className="flex-1 sm:flex-none flex items-center justify-center gap-1.5 bg-brand-gold hover:bg-brand-gold2 text-black font-syne font-bold text-xs uppercase tracking-widest px-6 py-3.5 rounded cursor-pointer transition-all shadow-lg disabled:opacity-50"
+    >
+      {isSubmitting ? "Submitting..." : "Submit Registration"}
+      <ChevronRight className="w-3.5 h-3.5" />
+    </button>
+
+  </div>
+</div>
+                  </form>
+                </div>
             ) : (
-              /* IF USER ALREADY SUBMITTED THEIR DETAILS -> RENDER THEIR GORGEOUS CUSTOM PASS CARD */
               <div className="flex flex-col items-center">
+                {/* Registration submitted - render delegate pass */}
                 
                 {/* Intro status alert */}
                 <div className="mb-6 text-center">
@@ -322,7 +353,7 @@ export default function RegistrationForm({ initialSelectedCommittee, isOpen, onC
                     <Check className="w-6 h-6 animate-bounce" />
                   </div>
                   <h3 className="font-syne font-extrabold text-2xl text-brand-text mb-1 select-none">
-                    Digital Delegate Pass Active!
+                    Registration Submitted!
                   </h3>
                   <p className="font-sans font-light text-xs text-brand-muted max-w-md mx-auto leading-relaxed">
                     Your seat details have been cached dynamically. To complete registration, ensure you submit form options on the verified Google Forms tab.
@@ -353,7 +384,7 @@ export default function RegistrationForm({ initialSelectedCommittee, isOpen, onC
                   </div>
 
                   {/* Core Member Details inside frame */}
-                  <div className="space-y-4 z-10 text-left">
+                  <div className="space-y-4 z-10 text-left"> 
                     <div>
                       <span className="block text-[8px] font-syne font-bold uppercase tracking-widest text-brand-dim mb-0.5">Full Name</span>
                       <p className="font-syne font-extrabold text-lg text-brand-text truncate leading-tight uppercase">
@@ -372,7 +403,7 @@ export default function RegistrationForm({ initialSelectedCommittee, isOpen, onC
                         <span className="block text-[8px] font-syne font-bold uppercase tracking-widest text-brand-dim mb-0.5">Admissions Status</span>
                         <p className="font-mono font-extrabold text-xs text-emerald-400 capitalize flex items-center gap-1">
                           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
-                          CONFIRMED
+                          PENDING PAYMENT
                         </p>
                       </div>
                     </div>
@@ -399,7 +430,6 @@ export default function RegistrationForm({ initialSelectedCommittee, isOpen, onC
                       </div>
                     </div>
                   </div>
-
                   {/* Barcode / Mock security seal */}
                   <div className="mt-6 pt-4 border-t border-brand-border/60 flex items-center justify-between z-10">
                     <div className="flex flex-col gap-0.5">
@@ -412,6 +442,7 @@ export default function RegistrationForm({ initialSelectedCommittee, isOpen, onC
                           />
                         ))}
                       </div>
+
                       <span className="font-mono text-[7px] text-brand-dim tracking-wider text-center">
                         SECURE TICKET ENCRYPTED
                       </span>
@@ -423,26 +454,21 @@ export default function RegistrationForm({ initialSelectedCommittee, isOpen, onC
 
                 {/* Sub Action buttons */}
                 <div className="mt-8 flex flex-wrap gap-3 justify-center border-t border-brand-border/40 pt-6 w-full max-w-sm">
-                  <a
-                    href={CONFIG.registrationUrl}
-                    target="_blank"
-                    className="flex-1 flex items-center justify-center gap-1.5 bg-brand-gold hover:bg-brand-gold2 text-black font-syne font-bold text-xs uppercase tracking-wider py-3.5 rounded cursor-pointer transition-all duration-200"
-                  >
-                    <FileSpreadsheet className="w-4 h-4" />
-                    Open Google Form
-                  </a>
+
                   <button
                     onClick={handleResetRegistration}
                     className="px-4 py-3 border border-red-500/20 text-red-500 hover:text-red-400 hover:border-red-500/40 font-syne font-bold text-xs uppercase tracking-wider rounded transition-all cursor-pointer"
                   >
-                    Reset Seed
+                    Reset Registration
                   </button>
+
                   <button
                     onClick={onClose}
                     className="px-4 py-3 bg-brand-surface border border-brand-border text-brand-text hover:border-brand-border2 font-syne font-bold text-xs uppercase tracking-wider rounded transition-all cursor-pointer"
                   >
                     Go Back
                   </button>
+
                 </div>
               </div>
             )}

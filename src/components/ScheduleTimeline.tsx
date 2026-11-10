@@ -2,31 +2,12 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Calendar, Clock, MapPin, ChevronRight } from "lucide-react";
 import { SCHEDULE_DATA, CONFIG } from "../data";
-import NewspaperCutout from "./NewspaperCutout";
 
 export default function ScheduleTimeline() {
   const [selectedDayIdx, setSelectedDayIdx] = useState(0);
 
   return (
     <section id="schedule" className="py-20 lg:py-28 bg-brand-bg/40 backdrop-blur-[1px] px-6 lg:px-12 border-b border-brand-border/20 relative overflow-hidden">
-      {/* Editorial Newspaper Cutouts Flanking the Schedule Section */}
-      <div className="block absolute left-1 sm:left-3 md:left-6 xl:left-8 2xl:left-12 top-20 sm:top-28 z-0 opacity-80 sm:opacity-85 lg:opacity-95">
-        <NewspaperCutout
-          variant="scales-of-justice"
-          rotation="-rotate-6 sm:-rotate-3"
-          tapePosition="top"
-          label="CHAMBER ORDER"
-        />
-      </div>
-      <div className="block absolute right-1 sm:right-3 md:right-6 xl:right-8 2xl:right-12 top-40 sm:top-48 z-0 opacity-80 sm:opacity-85 lg:opacity-95">
-        <NewspaperCutout
-          variant="vintage-newsprint"
-          rotation="rotate-6 sm:rotate-3"
-          tapePosition="top-right"
-          label="SESSION GAZETTE"
-        />
-      </div>
-
       <div className="max-w-6xl mx-auto relative z-10">
         
         {/* Header */}
@@ -35,11 +16,11 @@ export default function ScheduleTimeline() {
             Schedule
           </span>
           <h2 className="font-syne font-extrabold text-3xl sm:text-5xl text-brand-text mb-6">
-            Three Days. Maximum Intensity.
+            Conference Itinerary
           </h2>
           <div className="w-10 h-[3px] bg-brand-gold mb-6 rounded" />
           <p className="font-sans font-light text-brand-muted text-[15px] leading-relaxed">
-            Join us on {CONFIG.dates}. Every moment of CDA MUN is curated to stretch your debate stamina, connect you with premier peers, and ignite long-term impact.
+            Join us from {CONFIG.dates}. A 2.5-day conference schedule featuring focused committee sessions, guest addresses, and delegate socials.
           </p>
         </div>
 

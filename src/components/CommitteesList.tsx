@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from "motion/react";
 import { Search, SlidersHorizontal, BookOpen, AlertCircle, X, Award } from "lucide-react";
 import { COMMITTEES_DATA } from "../data";
 import { Committee } from "../types";
-import NewspaperCutout from "./NewspaperCutout";
 
 interface CommitteesListProps {
   onOpenRegisterForCommittee: (committeeName: string) => void;
@@ -28,24 +27,6 @@ export default function CommitteesList({ onOpenRegisterForCommittee }: Committee
 
   return (
     <section id="committees" className="py-20 lg:py-28 bg-brand-bg/40 backdrop-blur-[1px] px-6 lg:px-12 relative overflow-hidden border-b border-brand-border/20">
-      {/* Editorial Newspaper Cutouts Flanking the Committees Section */}
-      <div className="block absolute left-1 sm:left-3 md:left-6 xl:left-8 2xl:left-12 top-16 sm:top-32 z-0 opacity-80 sm:opacity-85 lg:opacity-95">
-        <NewspaperCutout
-          variant="megaphone-press"
-          rotation="-rotate-6 sm:-rotate-3"
-          tapePosition="top-left"
-          label="COMMUNIQUÉ"
-        />
-      </div>
-      <div className="block absolute right-1 sm:right-3 md:right-6 xl:right-8 2xl:right-12 top-36 sm:top-52 z-0 opacity-80 sm:opacity-85 lg:opacity-95">
-        <NewspaperCutout
-          variant="vintage-newsprint"
-          rotation="rotate-6 sm:rotate-2"
-          tapePosition="top"
-          label="GAZETTE ARCHIVE"
-        />
-      </div>
-
       <div className="max-w-6xl mx-auto relative z-10">
         
         {/* Intro */}

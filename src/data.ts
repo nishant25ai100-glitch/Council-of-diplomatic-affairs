@@ -2,12 +2,12 @@ import { Committee, TeamMember, ScheduleDay } from "./types";
 
 export const CONFIG = {
   registrationUrl: "https://docs.google.com/forms/d/e/1FAIpQLSeItiD58WkxK9T5kDm_CIRXALcQLTaXaVmVeVu-UVslkLyf-w/viewform?usp=header",
-  dates: "Dec, 2026",
-  day1: "11th Dec",
-  day2: "12th Dec",
-  day3: "13th Dec", // Adjusted matching 2026 flow
-  fee: "₹1,499",
-  deadline: "Dec 1st"
+  dates: "25th–27th Dec, 2026",
+  day1: "25th Dec",
+  day2: "26th Dec",
+  day3: "27th Dec",
+  fee: "₹1,799",
+  deadline: "Dec 20th"
 };
 
 export const COMMITTEES_DATA: Committee[] = [
@@ -72,30 +72,42 @@ export const TEAM_DATA: TeamMember[] = [
     ig: "#", ln: "#", email: "aarav@cdamun.com" 
   },
   { 
-    initials: "PR", 
+    initials: "DG", 
     name: "Isha Kapoor", 
-    role: "President", 
+    role: "Director General", 
     image: "https://lh3.googleusercontent.com/aida/AP1WRLuNqHyD51QbaDbLktFlE1G1EIbFS-cCqwyIYZm-BylK8xEkNrQYGhtRVBcrqeV6uueqRF2tt7bLpxBVLAmsVSc7DCfLCf09fAycNWFg9J-xOvYkrBDo8H4-FSsRAKN4aOzfY4eZGIrgGTZmEueWoekQFntmj2P0gNBV65OUw5OT4URs1OEgRX9xN9krO_w5TljaQ2zoxm01nFhlN5c6sHnc3E08df_YSnxUhGMl6zaVYTLzuZaYJ_eRhtg",
-    bio: "Leads conference planning, partner institutions, and overall conference execution for CDA Season 1.", 
+    bio: "Directs conference administration, institutional outreach, and executive secretariat execution for CDA Season 1.", 
     ig: "#", ln: "#", email: "isha@cdamun.com" 
   },
   { 
-    initials: "CC", 
-    name: "Rohan Das", 
-    role: "Conference Convenor", 
+    initials: "AR", 
+    name: "Aditya Rajpurohit", 
+    role: "Founding Advisor", 
     image: null,
-    bio: "Directs venue logistics, event schedules, hospitality, and delegate support services.", 
-    ig: "#", ln: "#", email: "rohan@cdamun.com" 
+    bio: "Provides strategic counsel, governance oversight, and institutional guidance across all conference affairs.", 
+    ig: "https://www.instagram.com/aad1tyeaa?obrf=MXUxazNsZGhqNGl4dg==", 
+    ln: "#", 
+    email: "rajpurohitaditya683@gmail.com" 
   },
   { 
     initials: "DJ", 
     name: "Dhruv Raj Jain", 
-    role: "Vice President", 
+    role: "Head of Relations", 
     image: null,
     bio: "Manages school and collegiate delegation relations, group registrations, and institutional partnerships.", 
     ig: "https://instagram.com/dhruv_raj_jain", 
     ln: "#", 
     email: "dhruvrajjain1@gmail.com" 
+  },
+  { 
+    initials: "MJ", 
+    name: "Mustafa Jaipuri", 
+    role: "Head of Operations", 
+    image: null,
+    bio: "Oversees on-ground volunteer teams, session coordination, and hall management during the three-day conference.", 
+    ig: "https://instagram.com/mustafajaipuri", 
+    ln: "#", 
+    email: "jaipurimustafa@gmail.com" 
   },
   { 
     initials: "NG", 
@@ -108,88 +120,113 @@ export const TEAM_DATA: TeamMember[] = [
     email: "gargnishant498@gmail.com" 
   },
   { 
-    initials: "MJ", 
-    name: "Mustafa Jaipuri", 
-    role: "Head of Operations", 
+    initials: "PN", 
+    name: "Priyal Narwani", 
+    role: "Head of Marketing", 
     image: null,
-    bio: "Oversees on-ground volunteer teams, session coordination, and hall management during the three-day conference.", 
-    ig: "https://instagram.com/mustafajaipuri", 
+    bio: "Drives conference branding, media partnerships, and digital delegate outreach across schools and universities.", 
+    ig: "https://instagram.com/priyalnarwanii", 
     ln: "#", 
-    email: "jaipurimustafa@gmail.com" 
+    email: "Priyalpriyalnarwani@gamil.com" 
+  },
+  { 
+    initials: "MV", 
+    name: "Mahika Vyas", 
+    role: "Head of Marketing", 
+    image: null,
+    bio: "Directs creative design, social media campaigns, campus ambassador programs, and promotional strategy.", 
+    ig: "https://instagram.com/mahikaavyas", 
+    ln: "#", 
+    email: "mahikavyas431@gmail.com" 
   }
 ];
 
 export const SCHEDULE_DATA: ScheduleDay[] = [
   {
     dayName: "Day 1",
-    dateStr: "11th Dec",
+    dateStr: "25th Dec",
     items: [
       {
-        time: "09:00 AM - 10:30 AM",
-        title: "Inauguration Ceremony",
-        desc: "Opening address by the Secretary General, chief guest address, and procedural briefing for delegates."
+        time: "04:00 PM - 05:30 PM",
+        title: "Opening Ceremony & Felicitation",
+        desc: "Formal conference inauguration and felicitation of the Chief Guest and dignitaries."
       },
       {
-        time: "11:00 AM - 01:00 PM",
-        title: "Committee Session I",
-        desc: "Roll call, formal agenda adoption, opening speeches, and the initial General Speakers List."
+        time: "05:30 PM - 06:30 PM",
+        title: "Keynote & Sponsor Addresses",
+        desc: "Keynote address by the Chief Guest and presentations by conference sponsors."
       },
       {
-        time: "01:00 PM - 02:00 PM",
-        title: "Lunch Break & Lobbying",
-        desc: "Informal consultations, unmoderated caucus, and preliminary bloc formation."
-      },
-      {
-        time: "02:00 PM - 05:30 PM",
-        title: "Committee Session II",
-        desc: "Working paper drafting, moderated caucuses, and scheduled crisis updates."
-      },
-      {
-        time: "07:00 PM onwards",
-        title: "Cultural Evening & Socials",
-        desc: "Delegate social event with live performances and networking mixers."
+        time: "06:30 PM - 08:00 PM",
+        title: "Live Social: Vivek & Band",
+        desc: "Live musical performance by Vivek and band, followed by delegate socials and networking."
       }
     ]
   },
   {
     dayName: "Day 2",
-    dateStr: "12th Dec",
+    dateStr: "26th Dec",
     items: [
       {
-        time: "09:30 AM - 12:00 PM",
-        title: "Morning Committee Session III",
-        desc: "Bloc consolidation, working paper mergers, and draft resolution submission."
+        time: "10:00 AM - 10:30 AM",
+        title: "Delegate Arrival & Check-In",
+        desc: "Chamber registration, attendance verification, and committee briefing."
       },
       {
-        time: "12:00 PM - 02:00 PM",
-        title: "Voting Procedure",
-        desc: "Formal presentation of draft resolutions, debate on amendments, and roll-call voting."
+        time: "10:30 AM - 12:30 PM",
+        title: "Committee Session I",
+        desc: "Roll call, formal agenda adoption, opening speeches, and General Speakers List."
       },
       {
-        time: "02:00 PM - 03:00 PM",
-        title: "Lunch & Reflection",
-        desc: "Delegation debriefs, official cohort photographs, and feedback collection."
+        time: "12:30 PM - 01:30 PM",
+        title: "Lunch Break & Lobbying",
+        desc: "Lunch service and informal unmoderated lobbying."
       },
       {
-        time: "03:00 PM - 05:30 PM",
-        title: "Closing & Valedictory",
-        desc: "Announcement of committee awards, certificate distribution, and closing remarks by the Secretariat."
+        time: "01:35 PM - 04:35 PM",
+        title: "Committee Session II",
+        desc: "Working paper drafting, moderated caucuses, and crisis updates."
+      },
+      {
+        time: "04:35 PM - 05:15 PM",
+        title: "High Tea & Informal Caucus",
+        desc: "Refreshment break and cross-bloc consultations."
+      },
+      {
+        time: "05:30 PM onwards",
+        title: "Delegate Socials",
+        desc: "Evening cultural events, entertainment, and delegate mixer."
       }
     ]
   },
   {
     dayName: "Day 3",
-    dateStr: "13th Dec",
+    dateStr: "27th Dec",
     items: [
       {
-        time: "10:00 AM - 01:00 PM",
-        title: "Grand Plenary Session",
-        desc: "Joint cross-committee plenary reviewing resolutions passed across all chambers."
+        time: "10:00 AM - 10:30 AM",
+        title: "Delegate Assembly & Roll Call",
+        desc: "Morning attendance, chamber roll call, and briefing for final proceedings."
       },
       {
-        time: "01:00 PM - 03:00 PM",
-        title: "Farewell Networking Lunch",
-        desc: "Closing lunch, final certificate collection, and Secretariat wrap-up."
+        time: "10:30 AM - 12:30 PM",
+        title: "Committee Session III",
+        desc: "Resolution drafting, amendment debates, and sponsor defense."
+      },
+      {
+        time: "12:30 PM - 01:30 PM",
+        title: "Lunch Break",
+        desc: "Lunch service and informal bloc coordination."
+      },
+      {
+        time: "01:35 PM - 04:35 PM",
+        title: "Committee Session IV",
+        desc: "Formal voting procedure, resolution passage, and committee adjournment."
+      },
+      {
+        time: "04:35 PM - 05:35 PM",
+        title: "Closing & Valedictory Ceremony",
+        desc: "Announcement of committee awards, certificate distribution, and Secretariat closing address."
       }
     ]
   }
