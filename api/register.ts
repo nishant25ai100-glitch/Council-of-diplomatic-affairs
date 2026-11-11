@@ -22,6 +22,14 @@ export default async function handler(
     });
   }
 
+  // REGISTRATION TEMPORARILY CLOSED
+if (process.env.REGISTRATION_OPEN !== "true") {
+  return res.status(503).json({
+    success: false,
+    message: "Registrations are currently closed. Please check back soon.",
+  });
+}
+
   try {
     const {
       fullName,
